@@ -12,12 +12,9 @@ import Admin from "./pages/Admin";
 
 function App() {
   return (
-    
-    <Router>
-<Route path="/admin" element={<Admin />} />
 
-      <Route path="/blog" element={<Blog />} />
-<Route path="/article/:id" element={<Article />} />
+    <Router>
+
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
@@ -26,6 +23,9 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/destinations" element={<Destinations />} />
             <Route path="/tips" element={<Tips />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/article/:id" element={<Article />} />
           </Routes>
         </main>
         <Footer />
