@@ -5,10 +5,19 @@ import Destinations from './pages/Destinations'
 import Tips from './pages/Tips'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Blog from "./pages/Blog";
+import Article from "./pages/Article";
+import Admin from "./pages/Admin";
+
 
 function App() {
   return (
+    
     <Router>
+<Route path="/admin" element={<Admin />} />
+
+      <Route path="/blog" element={<Blog />} />
+<Route path="/article/:id" element={<Article />} />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
