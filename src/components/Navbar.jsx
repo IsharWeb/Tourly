@@ -6,7 +6,7 @@ export default function Navbar() {
   return (
     <nav className="w-full position-sticky border-b border-gray-200 bg-white">
       <div className="max-w-screen-xl  mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between  items-center h-16">
+        <div className="flex justify-between items-center h-16">
           <div className="flex justify-flex-start  items-center gap-6">
 
             {/* Logo - Medium style */}

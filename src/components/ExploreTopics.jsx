@@ -26,7 +26,7 @@ export default function ExploreTopics() {
                          transition"
                     >
                         <FiSearch className="w-5 h-5 text-gray-500 absolute" />
-                        <p className="px-6">Explore topics</p>
+                        <p className="pl-6">Explore topics</p>
                     </button>
 
                     {topics.map(topic => (
