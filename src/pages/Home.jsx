@@ -1,26 +1,50 @@
-    import TravelCard from "../components/TravelCard";
-
+import React, { useState } from 'react';
+import ExploreTopics from '../components/ExploreTopics.jsx';
 
 const Home = () => {
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-4xl font-bold text-gray-800 mb-4">Explore the World</h1>
-      <p className="text-lg text-gray-600 mb-8">
-        Discover amazing places, tips, and travel guides to make your journey unforgettable.
-      </p>
-      <img
-        src="/assets/travel-banner.jpg"
-        alt="Travel"
-        className="rounded-lg shadow-lg w-full h-[400px] object-cover"
-      />
-    <h1>cads</h1>
+  const articles = [1, 2, 3]; // Placeholder articles
 
-<TravelCard
-  title="Bali, Indonesia"
-  description="A tropical paradise full of adventure, temples, and beaches."
-  image="/assets/bali.jpg"
-/>
+
+  return (
+    <div>
+      {/* Explore Topics Section */}
+      <ExploreTopics />
+      <div className="max-w-7xl mx-auto px-4 py-12 bg-gray-50">
+
+        {/* Articles Section */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {articles.map((item) => (
+            <div
+              key={item}
+              tabIndex={0}
+              aria-label={`Article ${item}`}
+              className="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition-transform duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt={`Article Cover ${item}`}
+                className="w-full h-60 object-cover transition-transform duration-300 hover:scale-105"
+              />
+              <div className="p-6">
+                <h2 className="text-xl md:text-2xl font-semibold mb-2 text-gray-900 hover:underline transition-colors duration-200 cursor-pointer">
+                  Article Title {item}
+                </h2>
+                <p className="text-gray-700 mb-4 text-sm md:text-base">
+                  A brief excerpt that mimics Medium's style — minimal, clean, and engaging. This is a placeholder.
+                </p>
+                <div className="flex items-center space-x-4 text-sm text-gray-500">
+                  <span>Author Name</span>
+                  <span>•</span>
+                  <span>Oct 23, 2023</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
     </div>
+
   );
 };
 
