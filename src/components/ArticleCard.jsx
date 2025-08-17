@@ -1,15 +1,62 @@
 import { Link } from "react-router-dom";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-const ArticleCard = ({ article }) => (
-  <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
-    <img src={article.image} alt={article.title} className="h-48 w-full object-cover" />
-    <div className="p-4">
-      <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">{article.title}</h2>
-      <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{article.description}</p>
-      <Link to={`/article/${article.id}`} className="text-blue-500 hover:underline">
-        Read More →
+const ArticleCard = ({ article }) => {
+  if (!article) return null;
+
+  const defaultImage =
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
+
+  const rating = article.rating || 4.5;
+  const reviewCount = article.reviewCount || 200;
+
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(<FaStar key={i} className="text-yellow-400 w-4 h-4" />);
+      } else if (rating >= i - 0.5) {
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400 w-4 h-4" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-yellow-400 w-4 h-4" />);
+      }
+    }
+    return stars;
+  };
+
+  return (
+    <div className="w-full rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition">
+      <Link to={`/article/${article.id || "#"}`} className="block">
+        {/* Image with title overlay */}
+        <div className="relative h-48">
+          <img
+            src={article.image || defaultImage}
+            alt={article.title || "Article image"}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
+            <h2 className="text-lg font-semibold text-white leading-tight">
+              {article.title || "Untitled Article"}
+            </h2>
+          </div>
+        </div>
+
+        {/* Description + rating */}
+        <div className="p-3">
+          <div className="flex items-center space-x-1 mb-2">
+            {renderStars(rating)}
+            <span className="text-sm text-gray-600">({reviewCount})</span>
+          </div>
+          <p className="text-sm text-gray-700 line-clamp-2 mb-2">
+            {article.description || "No description available."}
+          </p>
+          <span className="text-green-700 font-medium hover:underline">
+            Read More →
+          </span>
+        </div>
       </Link>
     </div>
-  </div>
-);
+  );
+};
+
 export default ArticleCard;
