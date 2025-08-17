@@ -1,50 +1,72 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ExploreTopics from '../components/ExploreTopics.jsx';
+import ArticleCard from '../components/ArticleCard.jsx';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const articles = [1, 2, 3]; // Placeholder articles
-
+  const articles = [
+    {
+      id: 1,
+      title: "Beach Paradise",
+      description: "A sunny escape with golden sands and crystal-clear water.",
+      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+      rating: 4.5,
+      reviewCount: 200,
+    },
+    {
+      id: 2,
+      title: "Mountain Adventure",
+      description: "Trek through beautiful peaks and experience nature up close.",
+      image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+      rating: 4.7,
+      reviewCount: 180,
+    },
+    {
+      id: 3,
+      title: "City Lights",
+      description: "Explore the vibrant nightlife and amazing street food.",
+      image: "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80",
+      rating: 4.6,
+      reviewCount: 220,
+    },
+    {
+      id: 4,
+      title: "Cultural Escape",
+      description: "Discover ancient architecture and timeless traditions.",
+      image: "https://images.unsplash.com/photo-1601924572058-6f7c96fbc0bb?auto=format&fit=crop&w=800&q=80",
+      rating: 4.8,
+      reviewCount: 250,
+    },
+  ];
 
   return (
     <div>
       {/* Explore Topics Section */}
       <ExploreTopics />
+
       <div className="max-w-7xl mx-auto px-4 py-12 bg-gray-50">
+        <section className="max-w-7xl mx-auto px-4 py-12">
+          <h2 className="text-2xl font-bold mb-6">Latest Articles</h2>
 
-        {/* Articles Section */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {articles.map((item) => (
-            <div
-              key={item}
-              tabIndex={0}
-              aria-label={`Article ${item}`}
-              className="bg-white rounded-lg overflow-hidden shadow hover:shadow-xl transition-transform duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+          {/* Articles Section - 4 Cards Responsive */}
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {articles.slice(0, 4).map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+
+          {/* View All button */}
+          <div className="mt-8 text-center">
+            <Link
+              to="/articles"
+              className="inline-block px-6 py-2 rounded-md bg-green-700 text-white font-medium hover:bg-green-800 transition"
             >
-              <img
-                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt={`Article Cover ${item}`}
-                className="w-full h-60 object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <div className="p-6">
-                <h2 className="text-xl md:text-2xl font-semibold mb-2 text-gray-900 hover:underline transition-colors duration-200 cursor-pointer">
-                  Article Title {item}
-                </h2>
-                <p className="text-gray-700 mb-4 text-sm md:text-base">
-                  A brief excerpt that mimics Medium's style — minimal, clean, and engaging. This is a placeholder.
-                </p>
-                <div className="flex items-center space-x-4 text-sm text-gray-500">
-                  <span>Author Name</span>
-                  <span>•</span>
-                  <span>Oct 23, 2023</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
+              View All Articles
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
-
   );
 };
 
