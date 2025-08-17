@@ -1,5 +1,7 @@
 import React from "react";
 import { FiSearch } from "react-icons/fi";
+import { FiCompass } from "react-icons/fi";
+
 
 // import { Search } from "lucide-react"; // Assuming you're using lucide-react for icons
 
@@ -25,8 +27,8 @@ export default function ExploreTopics() {
                          hover:border-gray-500 hover:bg-gray-100 
                          transition"
                     >
-                        <FiSearch className="w-5 h-5 text-gray-500 absolute" />
-                        <p className="pl-6">Explore topics</p>
+                        <FiCompass className="w-5 h-5 text-gray-500 absolute" />
+                        <p className="pl-7">Explore topics</p>
                     </button>
 
                     {topics.map(topic => (
