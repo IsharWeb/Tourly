@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  base: '/Tourly/', // <-- REQUIRED for GitHub Pages
 })
-
