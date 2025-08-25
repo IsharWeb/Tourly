@@ -25,8 +25,8 @@ const ArticleCard = ({ article }) => {
   };
 
   return (
-    <div className="w-full rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition">
-      <Link to={`/article/${article.id || "#"}`} className="block">
+    <div className="w-full max-w-xs rounded-lg overflow-hidden bg-white shadow hover:shadow-lg transition flex flex-col">
+      <Link to={`/article/${article.id || "#"}`} className="flex flex-col h-full">
         {/* Image with title overlay */}
         <div className="relative h-48">
           <img
@@ -35,19 +35,19 @@ const ArticleCard = ({ article }) => {
             className="w-full h-full object-cover"
           />
           <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-            <h2 className="text-lg font-semibold text-white leading-tight">
+            <h2 className="text-lg font-semibold text-white leading-tight line-clamp-2 min-h-[3rem]">
               {article.title || "Untitled Article"}
             </h2>
           </div>
         </div>
 
         {/* Description + rating */}
-        <div className="p-3">
+        <div className="p-3 flex flex-col flex-1">
           <div className="flex items-center space-x-1 mb-2">
             {renderStars(rating)}
             <span className="text-sm text-gray-600">({reviewCount})</span>
           </div>
-          <p className="text-sm text-gray-700 line-clamp-2 mb-2">
+          <p className="text-sm text-gray-700 line-clamp-2 flex-1 min-h-[3rem] mb-2">
             {article.description || "No description available."}
           </p>
           <span className="text-green-700 font-medium hover:underline">
