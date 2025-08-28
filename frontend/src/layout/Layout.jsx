@@ -1,8 +1,7 @@
 // src/layouts/MainLayout.jsx
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Toolbar from "../components/Toolbar";
-import HeroSection from "../components/HeroSection";
+import Navbar from "../components/home/Navbar";
+import Footer from "../components/home/Footer";
+import HeroSection from "../components/home/HeroSection";
 import { Outlet } from "react-router-dom";
 
 export default function Layout() {
