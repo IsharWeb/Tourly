@@ -27,37 +27,34 @@ export default function AdSection() {
   ];
 
   return (
-    <section className="w-full bg-white border-t border-gray-200 py-10">
-      <div className="max-w-screen-xl mx-auto px-4">
-
-        {/* Main section title */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-            Travel Deals You Can't Miss
-          </h2>
-          <p className="mt-2 text-gray-600 text-sm max-w-2xl mx-auto">
-            Explore exclusive discounts on flights, hotels, and vacation packages —
-            hand-picked just for you.
-          </p>
-        </div>
-
-        {/* Inline scrolling cards */}
-        <div className="flex gap-4 overflow-x-auto scrollbar-hide">
-          {ads.map((ad) => (
-            <div
-              key={ad.id}
-              className={`min-w-[240px] p-5 rounded-lg ${ad.bg} flex flex-col items-start justify-center shadow-sm hover:shadow-md transition-shadow duration-300 group`}
-            >
-              <h3 className="text-gray-900 font-semibold text-base mb-2 tracking-tight group-hover:font-bold transition">
-                {ad.title}
-              </h3>
-              <p className="text-gray-700 text-sm leading-snug">
-                {ad.description}
-              </p>
-            </div>
-          ))}
-        </div>
+    <div className="max-w-screen-xl mx-auto px-4">
+      {/* Main section title */}
+      <div className="text-center mb-8">
+        <h2 className="text-4xl font-bold text-gray-900 tracking-tight py-10">
+          Travel Ads You Can't Miss
+        </h2>
+        <p className="pb-8 text-gray-600 max-w-2xl mx-auto">
+          Explore more ads, discounts on flights, hotels, and vacation packages —
+          hand-picked just for you.
+        </p>
       </div>
-    </section>
+
+      {/* Three cards layout */}
+      <div className="flex gap-4">
+        {ads.slice(0, 3).map((ad, idx) => (
+          <div
+            key={ad.id}
+            className={`
+              ${ad.bg} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 group p-5 
+              flex flex-col justify-between 
+              ${idx === 1 ? "flex-[2] min-h-[280px]" : "flex-1 min-h-[220px]"}
+            `}
+          >
+            <h1 className="text-2xl font-serif py-4 font-bold">{ad.title}</h1>
+            <p className="text-gray-600 leading-snug">{ad.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
