@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
-import articles from "../data/articles";
+import { articles } from "../data/articles";
 
-const Article = () => {
+const Articles = () => {
   const { id } = useParams();
   const article = articles.find(a => a.id === parseInt(id));
 
   if (!article) {
-    return <div className="text-center mt-20 text-5xl text-red-500">Article not found.</div>;
+    return <div className="text-center mt-20 text-5xl py-30 text-red-500 text-4xl sm:text-6xl font-bold mb-8 tracking-tight">Articles not found.</div>;
   }
 
   return (
@@ -18,4 +18,4 @@ const Article = () => {
   );
 };
 
-export default Article;
+export default Articles;
