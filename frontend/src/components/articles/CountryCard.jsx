@@ -1,0 +1,128 @@
+import React, { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  MdExplore,
+  MdFavoriteBorder,
+  MdPerson,
+  MdFlight,
+  MdHotel,
+  MdBeachAccess,
+  MdDirectionsBus,
+  MdTune,
+  MdChevronLeft,
+  MdChevronRight
+} from "react-icons/md";
+
+const CountryCard = ({ countries }) => {
+  const navigate = useNavigate();
+  const scrollRef = useRef(null);
+  const scrollInterval = useRef(null);
+  const scrollDirection = useRef(1); // 1 = right, -1 = left
+
+  // Start auto scroll
+  useEffect(() => {
+    startScrolling();
+    return stopScrolling;
+  }, []);
+
+  const startScrolling = () => {
+    stopScrolling(); // clear previous interval
+    scrollInterval.current = setInterval(() => {
+      if (!scrollRef.current) return;
+      const container = scrollRef.current;
+
+      // Check if at ends
+      if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+        scrollDirection.current = -1; // switch to left
+      } else if (container.scrollLeft <= 0) {
+        scrollDirection.current = 1; // switch to right
+      }
+
+      container.scrollBy({ left: scrollDirection.current * 2, behavior: "smooth" });
+    }, 20);
+  };
+
+  const stopScrolling = () => {
+    if (scrollInterval.current) {
+      clearInterval(scrollInterval.current);
+      scrollInterval.current = null;
+    }
+  };
+
+  // Scroll manually by 4 cards
+  const manualScroll = (dir) => {
+    if (!scrollRef.current) return;
+    const container = scrollRef.current;
+    const cardWidth = container.querySelector(".country-card")?.offsetWidth || 300;
+    container.scrollBy({ left: dir * cardWidth * 4, behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <div className="text-center px-4 mb-8">
+        <h2 className="text-4xl font-bold text-gray-900 tracking-tight py-10">
+          Travel Deals You Can't Miss
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Explore exclusive discounts on flights, hotels, and vacation packages —
+          hand-picked just for you.
+        </p>
+      </div>
+
+      <div
+        className="relative max-w-screen-xl mx-auto py-8 px-4 group"
+        onMouseEnter={stopScrolling}
+        onMouseLeave={startScrolling}
+      >
+        {/* Left Arrow */}
+        <button
+          onClick={() => manualScroll(-1)}
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
+        >
+          <MdChevronLeft className="w-6 h-6" />
+        </button>
+
+        {/* Scroll Container */}
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto scrollbar-hidden overflow-hidden"
+        >
+          <div className="flex flex-nowrap gap-3">
+            {countries.map((country) => (
+              <div
+                key={country.name}
+                onClick={() => navigate(country.link)}
+                className="country-card cursor-pointer max-w-xs w-72 bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden relative group"
+              >
+                {/* Image container */}
+                <div className="w-full h-96 relative">
+                  <img
+                    src={country.image}
+                    alt={country.name}
+                    className="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* Hover overlay */}
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent text-white p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-lg font-bold">{country.name}</h3>
+                    <p className="text-sm">{country.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => manualScroll(1)}
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
+        >
+          <MdChevronRight className="w-6 h-6" />
+        </button>
+      </div>
+    </>
+  );
+};
+
+export default CountryCard;
