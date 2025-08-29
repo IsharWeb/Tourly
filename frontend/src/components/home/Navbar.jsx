@@ -16,12 +16,12 @@ export default function Navbar() {
               {/* Left side */}
               <div className="flex items-center gap-6">
                 <h1 className="text-3xl font-serif font-bold">Tourly</h1>
-                <div className="flex items-center bg-gray-100 rounded-full px-3 py-1 w-60">
+                <div className="flex items-center bg-gray-100 rounded-full px-3 py-1 w-70">
                   <FiSearch className="w-5 h-5 text-gray-500 flex-shrink-0" />
                   <input
                     type="search"
                     placeholder="Search"
-                    className="bg-transparent flex-1 outline-none px-2 py-1.5 text-base placeholder-gray-500"
+                    className="bg-transparent flex-1 outline-none px-2 w-2xl py-1.5 text-base placeholder-gray-500"
                   />
                 </div>
               </div>

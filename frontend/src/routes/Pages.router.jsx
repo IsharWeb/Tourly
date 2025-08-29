@@ -4,10 +4,10 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Tips from "../pages/Tips";
 import Articles from "../pages/Articles";
+import Article from "../pages/Article";
 import Admin from "../pages/Admin";
 import Layout from "../layout/Layout";
 
-// Main router component for the application
 function PagesRouter() {
   return (
     <Router basename="/Tourly">
@@ -18,7 +18,7 @@ function PagesRouter() {
           <Route path="/about" element={<About />} />
           <Route path="/tips" element={<Tips />} />
           <Route path="/articles" element={<Articles />} />
-
+          <Route path="/articles/:id" element={<Article />} /> {/* Dynamic article */}
         </Route>
 
         {/* Route without Navbar + Footer */}

@@ -1,13 +1,14 @@
-import React from "react";
+// ❌ REMOVE THIS LINE (it's wrong)
+// import { articles } from "../data/articles";
 
-const ArticleCard = ({ articles }) => {
+// ✅ ArticleCard should only display props:
+const ArticleCard = ({ title, image, link }) => {
   return (
-    <div className="max-w-screen-xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-8 text-gray-900">
-        Latest Articles
-      </h2>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        ishar khan card
+    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+      <img className="w-full" src={image} alt={title} />
+      <div className="px-6 py-4">
+        <h2 className="font-bold text-xl mb-2">{title}</h2>
+        <a href={link} className="text-blue-500 underline">Read more</a>
       </div>
     </div>
   );

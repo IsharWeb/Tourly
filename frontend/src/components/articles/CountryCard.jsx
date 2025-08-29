@@ -1,14 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  MdExplore,
-  MdFavoriteBorder,
-  MdPerson,
-  MdFlight,
-  MdHotel,
-  MdBeachAccess,
-  MdDirectionsBus,
-  MdTune,
   MdChevronLeft,
   MdChevronRight
 } from "react-icons/md";
@@ -19,27 +11,27 @@ const CountryCard = ({ countries }) => {
   const scrollInterval = useRef(null);
   const scrollDirection = useRef(1); // 1 = right, -1 = left
 
-  // Start auto scroll
   useEffect(() => {
     startScrolling();
-    return stopScrolling;
+    return stopScrolling; // cleanup on unmount
   }, []);
 
   const startScrolling = () => {
-    stopScrolling(); // clear previous interval
+    stopScrolling(); // clear previous interval if any
     scrollInterval.current = setInterval(() => {
       if (!scrollRef.current) return;
       const container = scrollRef.current;
 
-      // Check if at ends
+      // Reverse scroll direction at ends
       if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
-        scrollDirection.current = -1; // switch to left
+        scrollDirection.current = -1;
       } else if (container.scrollLeft <= 0) {
-        scrollDirection.current = 1; // switch to right
+        scrollDirection.current = 1;
       }
 
-      container.scrollBy({ left: scrollDirection.current * 2, behavior: "smooth" });
-    }, 20);
+      // Instant step scroll for smooth visual effect
+      container.scrollBy({ left: scrollDirection.current * 2 });
+    }, 40); // slightly slower interval for smoothness
   };
 
   const stopScrolling = () => {
@@ -49,11 +41,13 @@ const CountryCard = ({ countries }) => {
     }
   };
 
-  // Scroll manually by 4 cards
+  // Scroll manually by ~4 cards
   const manualScroll = (dir) => {
+    stopScrolling(); // pause auto-scroll when manually scrolling
     if (!scrollRef.current) return;
     const container = scrollRef.current;
-    const cardWidth = container.querySelector(".country-card")?.offsetWidth || 300;
+    const card = container.querySelector(".country-card");
+    const cardWidth = card ? card.offsetWidth : 300;
     container.scrollBy({ left: dir * cardWidth * 4, behavior: "smooth" });
   };
 
@@ -77,6 +71,7 @@ const CountryCard = ({ countries }) => {
         {/* Left Arrow */}
         <button
           onClick={() => manualScroll(-1)}
+          aria-label="Scroll left"
           className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
         >
           <MdChevronLeft className="w-6 h-6" />
@@ -85,13 +80,16 @@ const CountryCard = ({ countries }) => {
         {/* Scroll Container */}
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hidden overflow-hidden"
+          className="flex gap-4 overflow-x-auto scrollbar-hidden"
         >
           <div className="flex flex-nowrap gap-3">
             {countries.map((country) => (
               <div
                 key={country.name}
+                role="button"
+                tabIndex={0}
                 onClick={() => navigate(country.link)}
+                onKeyDown={(e) => e.key === "Enter" && navigate(country.link)}
                 className="country-card cursor-pointer max-w-xs w-72 bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden relative group"
               >
                 {/* Image container */}
@@ -116,6 +114,7 @@ const CountryCard = ({ countries }) => {
         {/* Right Arrow */}
         <button
           onClick={() => manualScroll(1)}
+          aria-label="Scroll right"
           className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
         >
           <MdChevronRight className="w-6 h-6" />
