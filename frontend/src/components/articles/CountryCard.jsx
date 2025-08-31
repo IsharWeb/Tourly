@@ -31,7 +31,7 @@ const CountryCard = ({ countries }) => {
 
       // Instant step scroll for smooth visual effect
       container.scrollBy({ left: scrollDirection.current * 2 });
-    }, 40); // slightly slower interval for smoothness
+    }, 20); // slightly slower interval for smoothness
   };
 
   const stopScrolling = () => {
@@ -48,7 +48,7 @@ const CountryCard = ({ countries }) => {
     const container = scrollRef.current;
     const card = container.querySelector(".country-card");
     const cardWidth = card ? card.offsetWidth : 300;
-    container.scrollBy({ left: dir * cardWidth * 4, behavior: "smooth" });
+    container.scrollBy({ left: dir * cardWidth * 3, behavior: "smooth" });
   };
 
   return (
@@ -63,51 +63,62 @@ const CountryCard = ({ countries }) => {
         </p>
       </div>
 
-      <div
-        className="relative max-w-screen-xl mx-auto py-8 px-4 group"
+
+      <div className="relative max-w-screen-xl mx-auto py-8  group"
+
         onMouseEnter={stopScrolling}
         onMouseLeave={startScrolling}
       >
-        {/* Left Arrow */}
-        <button
-          onClick={() => manualScroll(-1)}
-          aria-label="Scroll left"
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
-        >
-          <MdChevronLeft className="w-6 h-6" />
-        </button>
 
-        {/* Scroll Container */}
         <div
-          ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hidden"
+          className=""
+          
         >
-          <div className="flex flex-nowrap gap-3">
-            {countries.map((country) => (
-              <div
-                key={country.name}
-                role="button"
-                tabIndex={0}
-                onClick={() => navigate(country.link)}
-                onKeyDown={(e) => e.key === "Enter" && navigate(country.link)}
-                className="country-card cursor-pointer max-w-xs w-72 bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden relative group"
-              >
-                {/* Image container */}
-                <div className="w-full h-96 relative">
-                  <img
-                    src={country.image}
-                    alt={country.name}
-                    className="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
 
-                  {/* Hover overlay */}
-                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent text-white p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                    <h3 className="text-lg font-bold">{country.name}</h3>
-                    <p className="text-sm">{country.description}</p>
+
+          {/* Left Arrow */}
+          <button
+            onClick={() => manualScroll(-1)}
+            aria-label="Scroll left"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow rounded-full p-2 z-10 hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <MdChevronLeft className="w-6 h-6" />
+          </button>
+
+          {/* Scroll Container */}
+          <div
+            ref={scrollRef}
+            className="flex gap-8 overflow-x-auto scrollbar-hidden"
+          >
+            <div className="flex flex-nowrap gap-6">
+              {countries.map((country) => (
+                <div
+                  key={country.name}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => navigate(country.link)}
+                  onKeyDown={(e) => e.key === "Enter" && navigate(country.link)}
+                  className="country-card cursor-pointer max-w-xs w-100 bg-white rounded-lg shadow hover:shadow-md transition overflow-hidden relative group"
+                >
+                  {/* Image container */}
+                  <div className="w-full h-96 relative">
+                    <img
+                      src={country.image}
+                      alt={country.name}
+                      className="w-full h-100 object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    {/* Hover overlay */}
+                    <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent text-white p-4 ">
+                      <h3 className="text-3xl font-serif font-bold">{country.name}</h3>
+                      <p className="text-sm">{country.description}</p>
+
+                    </div>
+                    <button>ksjadflsadkjf</button>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 

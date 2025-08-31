@@ -1762,3 +1762,7 @@ On hover: the text slides down to the bottom, and the image i
 
 No file chosenNo file chosen
 ChatGPT can make mistakes. Check important info.
+
+
+
+
