@@ -18,7 +18,8 @@ function PagesRouter() {
           <Route path="/about" element={<About />} />
           <Route path="/tips" element={<Tips />} />
           <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:id" element={<Article />} /> {/* Dynamic article */}
+          {/* article with name and id the name show in path it needed id dont show  */}
+          <Route path="/article/:id" element={<Article />} /> {/* Dynamic article */}
         </Route>
 
         {/* Route without Navbar + Footer */}

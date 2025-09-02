@@ -29,6 +29,7 @@ const Home = () => {
               key={article.id}
               title={article.title}
               image={article.image}
+              shortDesc={article.shortDesc}
               link={article.link}
             />
           ))}
