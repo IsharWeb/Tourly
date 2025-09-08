@@ -1,10 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { articles } from "../data/data";
 import ArticleCard from "../components/articles/ArticleCard";
 
 const Article = () => {
-  const { id } = useParams();
-  const article = articles.find(a => a.id === id); // If id is string in data
+  const { countryName, id } = useParams();
+
+  // Find the article by both country and id
+  const article = articles.find(
+    (a) =>
+      a.id.toString() === id &&
+      a.country.toLowerCase() === countryName.toLowerCase()
+  );
 
   if (!article) {
     return (
@@ -15,47 +21,53 @@ const Article = () => {
   }
 
   return (
-    <>
-      {/* Article read section */}
-      {/* here we need semple article                  lesson when user click on articlecard to go directly in article page where showr article title and despriptionn images i mean show me all post about the card      but when i click onn car to show me that errr "The server is configured with a public base URL of /Tourly/ - did you mean to visit /Tourly/article/italy instead?"   when i click on that link to show                   Tourly
-Search
-Write
-Subscribe
-Find Your Perfect Tour
-Flights
-Hotels
-Beaches
-Tours
-Search for tours, cities, or experiences...
-Tourly
-Article not found.
-© 2025 TravelAdvisor by Ishar. All rights reserved.*/}
-      <div className="max-w-3xl mx-auto px-10 py-30">
-        <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4 font-serif">
-          {article.title}
-        </h1>
-        <img src={article.image} alt={article.title} className="rounded-lg mb-6" />
-        <p className="text-gray-700 dark:text-gray-200">{article.content}</p>
-      </div>
+    <div className="max-w-5xl mx-auto px-6 py-16">
+      {/* Article details */}
+      <h1 className="text-4xl font-bold text-gray-800 mb-6 font-serif">
+        {article.title}
+      </h1>
+      <img
+        src={article.image}
+        alt={article.title}
+        className="w-full h-auto rounded-lg mb-8"
+      />
+      <p className="text-lg leading-relaxed text-gray-700 mb-12">
+        {article.content}
+      </p>
 
-      {/* here we need semple article                  lesson when user click on articlecard to go directly in article page where showr article title and despriptionn images i mean show me all post about the card*/}
-      <div className="flex flex-wrap justify-center gap-6">
+      {/* Related articles from the same country */}
+      <h2 className="text-2xl font-semibold mb-6">
+        More from {article.country}
+      </h2>
+      <div className="grid md:grid-cols-3 gap-8">
         {articles
-          .filter(a => a.id !== article.id) // don't show current article again
-          .map(a => (
+          .filter(
+            (a) =>
+              a.id !== article.id &&
+              a.country.toLowerCase() === article.country.toLowerCase()
+          )
+          .map((a) => (
             <ArticleCard
               key={a.id}
+              id={a.id}
+              countryName={a.country}
               title={a.title}
               image={a.image}
-              link={`/articles/${a.id}`}
+              shortDesc={a.shortDesc}
             />
           ))}
       </div>
 
-
-      {/* Recommended articles  show me below */}
-
-    </>
+      {/* Back button */}
+      <div className="mt-12 text-center">
+        <Link
+          to={`/articles/${article.country.toLowerCase()}`}
+          className="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition"
+        >
+          ← Back to {article.country} Articles
+        </Link>
+      </div>
+    </div>
   );
 };
 
