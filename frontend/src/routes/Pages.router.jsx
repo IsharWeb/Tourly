@@ -15,7 +15,7 @@ import ArticleDetail from "../pages/ArticleDetail.jsx";
 
 function PagesRouter() {
   return (
-    <Router basename="/Tourly">
+    <Router>
       <Routes>
         {/* Routes with Navbar + Footer */}
         <Route element={<Layout />}>
