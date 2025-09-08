@@ -1,0 +1,49 @@
+.
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── project-structure.txt
+├── public
+│   └── vite.svg
+├── README.md
+├── src
+│   ├── App.css
+│   ├── App.jsx
+│   ├── assets
+│   │   └── react.svg
+│   ├── components
+│   │   ├── AdsSection.jsx
+│   │   ├── articles
+│   │   │   ├── ArticleCard.jsx
+│   │   │   └── CountryCard.jsx
+│   │   └── home
+│   │       ├── Footer.jsx
+│   │       ├── HeroSection.jsx
+│   │       ├── Navbar.jsx
+│   │       └── Toolbar.jsx
+│   ├── data
+│   │   └── data.js
+│   ├── index.css
+│   ├── layout
+│   │   └── Layout.jsx
+│   ├── main.jsx
+│   ├── pages
+│   │   ├── About.jsx
+│   │   ├── Admin.jsx
+│   │   ├── Article.jsx
+│   │   ├── Articles.jsx
+│   │   ├── Countries.jsx
+│   │   ├── Error.jsx
+│   │   ├── Home.jsx
+│   │   └── Tips.jsx
+│   ├── routes
+│   │   └── Pages.router.jsx
+│   └── utils
+│       ├── Button.jsx
+│       ├── Common.jsx
+│       └── Input.jsx
+├── tailwind.config.js
+└── vite.config.js
+
+12 directories, 35 files
