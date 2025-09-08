@@ -1,4 +1,4 @@
-import { articles } from "../data/articles";
+import { articles } from "../data/data";
 import ArticleCard from "../components/articles/ArticleCard";
 
 const Articles = () => {
