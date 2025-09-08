@@ -3,10 +3,21 @@ import { Link } from "react-router-dom";
 import AdsSection from "../components/AdsSection.jsx";
 import CountryCard from "../components/articles/CountryCard.jsx";
 import ArticleCard from "../components/articles/ArticleCard.jsx";
-import { articles, countries } from "../data/data.js";
+import { countries } from "../data/data.js";
 import Button from "../utils/Button.jsx";
 
 const Home = () => {
+  // Flatten all articles from all countries
+  const articles = countries.flatMap((country) =>
+    country.articles.map((article) => ({
+      ...article,
+      countryName: country.name,
+    }))
+  );
+
+  // Optional: show only latest 6 articles
+  const latestArticles = articles.slice(0, 6);
+
   return (
     <div className="w-full">
 
@@ -24,13 +35,13 @@ const Home = () => {
       <section className="max-w-7xl mx-auto px-4 py-16 bg-gray-50">
         <h2 className="text-3xl font-bold mb-8 text-center">Latest Articles</h2>
         <div className="flex flex-wrap justify-center gap-6">
-          {articles.map((article) => (
+          {latestArticles.map((article) => (
             <ArticleCard
               key={article.id}
               title={article.title}
               image={article.image}
               shortDesc={article.shortDesc}
-              link={article.link}
+              link={`/article/${article.countryName}/${article.id}`} // ✅ Correct dynamic link
             />
           ))}
         </div>
