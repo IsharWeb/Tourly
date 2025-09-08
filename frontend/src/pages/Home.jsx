@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AdsSection from "../components/AdsSection.jsx";
 import CountryCard from "../components/articles/CountryCard.jsx";
 import ArticleCard from "../components/articles/ArticleCard.jsx";
-import { articles, countries } from "../data/articles.js";
+import { articles, countries } from "../data/data.js";
 import Button from "../utils/Button.jsx";
 
 const Home = () => {
