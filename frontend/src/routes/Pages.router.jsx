@@ -1,12 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home";
-import About from "../pages/About";
-import Tips from "../pages/Tips";
-import Articles from "../pages/Articles";
-import Article from "../pages/Article";
-import Admin from "../pages/Admin";
-import Layout from "../layout/Layout";
+import Home from "../pages/Home.jsx";
+import About from "../pages/About.jsx";
+import Tips from "../pages/Tips.jsx";
+import Articles from "../pages/Articles.jsx";
+import Countries from "../pages/Countries.jsx";
+import Article from "../pages/Article.jsx"; // you already have this
+import Admin from "../pages/Admin.jsx";
+import Layout from "../layout/Layout.jsx";
+
+// New pages
+import CountryArticles from "../pages/CountryArticles.jsx";
+import ArticleDetail from "../pages/ArticleDetail.jsx";
 
 function PagesRouter() {
   return (
@@ -18,8 +23,17 @@ function PagesRouter() {
           <Route path="/about" element={<About />} />
           <Route path="/tips" element={<Tips />} />
           <Route path="/articles" element={<Articles />} />
-          {/* article with name and id the name show in path it needed id dont show  */}
-          <Route path="/article/:id" element={<Article />} /> {/* Dynamic article */}
+          <Route path="/countries" element={<Countries />} />
+
+          {/* New dynamic routes */}
+          <Route path="/articles/:countryName" element={<CountryArticles />} />
+          <Route
+            path="/article/:countryName/:articleId"
+            element={<ArticleDetail />}
+          />
+
+          {/* Keep old single-article route if needed */}
+          <Route path="/article/:id" element={<Article />} />
         </Route>
 
         {/* Route without Navbar + Footer */}
