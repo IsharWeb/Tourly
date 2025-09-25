@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Optional custom styles */
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;

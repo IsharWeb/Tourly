@@ -2,7 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import Toolbar from "../home/Toolbar.jsx";
 import Navbar from "../home/Navbar.jsx";
 import Input from "../../utils/Input.jsx";
-import { MdExplore, MdFavoriteBorder, MdPerson, MdFlight, MdHotel, MdBeachAccess, MdDirectionsBus, MdTune } from "react-icons/md";
+import { FiSearch } from "react-icons/fi";
+import {
+  MdExplore,
+  MdFavoriteBorder,
+  MdPerson,
+  MdFlight,
+  MdHotel,
+  MdBeachAccess,
+  MdDirectionsBus,
+  MdTune,
+} from "react-icons/md";
 
 export default function HeroSection() {
   const [showNavbar, setShowNavbar] = useState(true);
@@ -23,41 +33,53 @@ export default function HeroSection() {
     <div className="font-sans bg-white text-gray-900 min-h-screen">
       {showNavbar && <Navbar />}
 
-      <section className="flex flex-col border-b border-gray-200 items-center justify-center px-4 sm:px-6 py-24 min-h-screen text-center">
+      <section className="flex flex-col items-center justify-center text-center px-4 sm:px-6 py-24 min-h-screen border-b border-gray-200">
         {/* Heading */}
-        <h1 className="text-4xl sm:text-6xl font-bold mb-8 tracking-tight">
+        <h1 className="text-4xl sm:text-6xl font-bold mb-12 tracking-tight">
           Find Your Perfect Tour
         </h1>
 
         {/* Travel Icons Row */}
-        <div className="flex flex-wrap justify-center gap-8 mb-10 text-gray-500 text-3xl sm:text-4xl">
+        <div className="flex flex-wrap justify-center gap-10 mb-14 text-gray-600">
           {[
             { icon: MdFlight, label: "Flights" },
             { icon: MdHotel, label: "Hotels" },
             { icon: MdBeachAccess, label: "Beaches" },
             { icon: MdDirectionsBus, label: "Tours" },
+            { icon: MdExplore, label: "Explore" },
+            { icon: MdFavoriteBorder, label: "Favorites" },
+            { icon: MdPerson, label: "Profile" },
           ].map((item, index) => (
             <div
               key={index}
-              className="flex flex-col items-center cursor-pointer hover:text-gray-600 transition-colors"
+              className="flex flex-col items-center cursor-pointer group transition"
             >
-              <item.icon className="w-6 h-56text-gray-500 flex-shrink-0" />
-              <span className="mt-1 text-sm sm:text-base font-medium">{item.label}</span>
+              <item.icon className="w-7 h-7 text-gray-500 transition group-hover:text-gray-700" />
+              <span className="mt-1 text-sm font-medium text-gray-500 transition group-hover:text-gray-700">
+                {item.label}
+              </span>
             </div>
           ))}
         </div>
 
         {/* Search Bar */}
-        <div className="w-full max-w-lg">
-          <div className="flex items-center bg-gray-100 rounded-full px-3 py-2 sm:px-6 sm:py-3 text-lg sm:text-2xl">
+        <div className="w-full max-w-2xl">
+          <div className="flex items-center bg-gray-100 rounded-full p-5 h-14 w-full shadow-sm">
+            {/* Left Search Icon */}
+            <FiSearch className="w-7 h-7 text-gray-500 transition group-hover:text-gray-700" />
+
+            {/* Input */}
             <Input
               placeholder="Search for tours, cities, or experiences..."
-              className="flex-1 bg-transparent outline-none text-lg sm:text-2xl placeholder-gray-500"
+              className="flex-1 bg-transparent outline-none px-3 py-2.5 text-base placeholder-gray-500"
             />
-            {/* Filter Icon */}
-            <MdTune className="w-6 h-6 text-gray-500 transition hover:text-gray-600" />
+
+            {/* Right Filter Icon */}
+            <MdTune className="w-7 h-7 text-gray-500 transition group-hover:text-gray-700" />
           </div>
+
         </div>
+
       </section>
 
       {!showNavbar && <Toolbar />}
